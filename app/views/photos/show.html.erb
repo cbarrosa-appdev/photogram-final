@@ -34,6 +34,14 @@
        <%= time_ago_in_words(@the_photo.created_at) %> ago
       </dd>
 
+
+      <dt>
+        Likes count
+      </dt>
+      <dd>
+        <%= @the_photo.likes_count %>
+      </dd>
+
       <dt>
         Comments count
       </dt>
@@ -42,10 +50,27 @@
       </dd>
 
       <dt>
-        Likes count
+        Fans
       </dt>
       <dd>
-        <%= @the_photo.likes_count %>
+        <%@the_photo.fans.each do |fan| %>
+        <%=fan.username%>
+        <%end%>
+      </dd>
+
+            <dt>
+       Add a fan
+      </dt>
+      <dd>
+      <%l=Like.all.where({:photo_id=>@the_photo.id, :fan_id=>@current_user.id}).at(0)%>
+      <%if l==nil%>
+       <form action="/insert_like" method="post">
+       <button>Like</button>
+       <input type="hidden" value="<%=@the_photo.id%>" name="query_photo_id">
+       </form>
+       <%else%>
+       <a href="/delete_like/<%=l.id%>">Unlike</a>
+       <%end%>
       </dd>
 
     </dl>
