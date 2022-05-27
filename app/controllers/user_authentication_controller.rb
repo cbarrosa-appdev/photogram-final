@@ -95,6 +95,19 @@ class UserAuthenticationController < ApplicationController
     end
   end
 
+  def update2
+    @user = @current_user
+    @user.private = params.fetch("query_private", false)
+    @user.username = params.fetch("query_username")
+    
+    if @user.valid?
+      @user.save
+      redirect_to("/users/"+@user.username, { :notice => "User account updated successfully."})
+    else
+      render({ :template => "user_authentication/edit_profile_with_errors.html.erb" , :alert => @user.errors.full_messages.to_sentence })
+    end
+  end
+
   def destroy
     @current_user.destroy
     reset_session

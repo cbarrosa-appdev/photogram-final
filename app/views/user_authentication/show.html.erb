@@ -1,1 +1,37 @@
-<%=@the_user.username%>
+<h1><%=@the_user.username%></h1>
+
+<dl>
+  <dt>Private</dt>
+  <dd><%=@the_user.private%></dd>
+
+  <dt>Followers</dt>
+  <dd>POR IMPLEMENTAR</dd>
+
+<%if @current_user.id==@the_user.id%>
+   <dt>Pending follow requests</dt>
+  <dd>POR IMPLEMENTAR</dd>
+  <%end%>
+
+  <dt>Following</dt>
+  <dd>POR IMPLEMENTAR</dd>
+
+  <%if @current_user.id==@the_user.id%>
+<dt>Edit user</dt>
+  <dd>
+    <form action="/modify_user2" method="post">
+      <label for="browser_username">Username</label>
+      <input id="browser_username" type="text" name="query_username" placeholder="Enter a username..." value=<%=@the_user.username%>>
+      <label for="browser_private">Private?</label>
+      <input id="browser_private" type="checkbox" name="query_private"  value=<%=@the_user.private%>>
+      <button>Update user</button>
+    </form>
+  </dd>
+  <%end%>
+</dl>
+
+<ul>
+    <li><a href="/users/<%=@the_user.username%>">Profile</a></li>
+    <li><a href="/users/<%=@the_user.username%>/liked_photos">Liked photos</a></li>
+    <li><a href="/users/<%=@the_user.username%>/feed">Feed</a></li>
+    <li><a href="/users/<%=@the_user.username%>/discover">Discover</a></li>
+</ul>
