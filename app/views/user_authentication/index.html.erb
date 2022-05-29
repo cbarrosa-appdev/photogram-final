@@ -57,10 +57,10 @@
               </td>
           <% else %>
               <% if follow.status == "accepted" %>
-                  <td>accepted</td>
+                  <td><a href=/delete_follow_request/<%=follow.id%>>Unfollow</a></td>
               <% else %>
                   <%if follow.status == "pending"%>
-                  <td>pending</td>
+                  <td>Request sent.<a href=/delete_follow_request/<%=follow.id%>>Cancel</a></td>
                   <%else%>
                    <td></td>
                   <%end%>
