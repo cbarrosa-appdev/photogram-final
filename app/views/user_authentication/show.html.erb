@@ -5,15 +5,21 @@
   <dd><%=@the_user.private%></dd>
 
   <dt>Followers</dt>
-  <dd>POR IMPLEMENTAR</dd>
+  
+  <dd><%=@the_user.followers.count%></dd>
 
 <%if @current_user.id==@the_user.id%>
    <dt>Pending follow requests</dt>
-  <dd>POR IMPLEMENTAR</dd>
+   <%pendin=FollowRequest.where({:recipient_id=>@the_user.id, :status=>"pendind"})%>
+  <ul>
+   <%pendin.each do |request|%>
+   <li><%=request.sender.username%></li>
+   <%end%>
+   </ul>
   <%end%>
 
   <dt>Following</dt>
-  <dd>POR IMPLEMENTAR</dd>
+  <dd><%=@the_user.following.count%></dd>
 
   <%if @current_user.id==@the_user.id%>
 <dt>Edit user</dt>
