@@ -36,17 +36,39 @@
         </td>
 
         <td>
-          <%if a_user.private %>
+          <% if a_user.private %>
           Yes
-          <%else%>
+          <% else %>
           No
-          <%end%>
+          <% end %>
         </td>
           
-        <td>Follow</td>
-
+        <% if @current_user != nil %>
+        <% follow = FollowRequest.where({ :sender_id => @current_user.id, :recipient_id => a_user.id }).at(0) %>
+        
+          <% if follow == nil %>
+              <td>
+              <form action="/insert_follow_request" method="post">
+              <input type="hidden" name="query_recipient_id" value="<%=a_user.id%>">
+              <button>
+                Follow
+              </button>
+              </form>
+              </td>
+          <% else %>
+              <% if follow.status == "accepted" %>
+                  <td>accepted</td>
+              <% else %>
+                  <%if follow.status == "pending"%>
+                  <td>pending</td>
+                  <%else%>
+                   <td></td>
+                  <%end%>
+              <% end %>
+          <%end%>
+        <% end %>
         <td>
-          <a href="/users/<%=a_user.username%>">Show details</a>
+          <a href="/users/<%= a_user.username %>">Show details</a>
         </td>
 
 
