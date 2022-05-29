@@ -17,6 +17,14 @@ class UserAuthenticationController < ApplicationController
   end
 
 
+  def feed
+    in_username=params.fetch("username")
+    @the_user = User.all.where({:username=>in_username}).at(0)
+
+    render({ :template => "user_authentication/feed.html.erb" })
+  end
+
+
   def sign_in_form
     render({ :template => "user_authentication/sign_in.html.erb" })
   end

@@ -20,4 +20,6 @@ class User < ApplicationRecord
   has_many(:comments, {:class_name=>"Comment",:foreign_key=>"author_id"})
   has_many(:followers, {:class_name=>"FollowRequest",:foreign_key=>"recipient_id"})
   has_many(:following, {:class_name=>"FollowRequest",:foreign_key=>"sender_id"})
+  has_many(:following_users,{:through=>:following, :source=>:recipient})
+  
 end

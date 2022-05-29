@@ -27,7 +27,7 @@
 
 <%if @current_user.id==@the_user.id%>
    <dt>Pending follow requests</dt>
-   <%pendin=FollowRequest.where({:recipient_id=>@the_user.id, :status=>"pendind"})%>
+   <%pendin=FollowRequest.where({:recipient_id=>@the_user.id, :status=>"pending"})%>
   <ul>
    <%pendin.each do |request|%>
    <li><%=request.sender.username%></li>
